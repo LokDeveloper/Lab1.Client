@@ -6,6 +6,7 @@
 
 QT       += core gui
 QT       += network
+QT       += sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -24,26 +25,33 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 CONFIG += c++11
+CONFIG += crypto
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp \
     secondwindow.cpp \
-    database.cpp
+    database.cpp \
+    crypto.cpp
 
 HEADERS += \
-        mainwindow.h \
     secondwindow.h \
-    database.h
+    database.h \
+    crypto.h
 
 FORMS += \
-        mainwindow.ui \
     secondwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+
+INCLUDEPATH += C:/OpenSSL-Win64/include
+LIBS += -LC:/OpenSSL-Win64/lib
+LIBS += -llibcrypto
+LIBS += -llibssl
+LIBS += -lopenssl
 
 RESOURCES += \
     resource.qrc
